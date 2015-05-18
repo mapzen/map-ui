@@ -15,7 +15,7 @@ var s3 = require('gulp-s3-upload')({
 gulp.task('default', ['css', 'js', 'images', 'json'])
 
 gulp.task('css', function () {
-  return gulp.src('components/**/*.css')
+  return gulp.src(['components/**/*.css', '!components/**/vendor/**'])
     .pipe(minifyCSS({ keepSpecialComments: 0 }))
     .pipe(rename({
       extname: '.min.css'
@@ -24,7 +24,7 @@ gulp.task('css', function () {
 })
 
 gulp.task('js', function () {
-  return gulp.src('components/**/*.js')
+  return gulp.src(['components/**/*.js', '!components/**/vendor/**'])
     .pipe(uglify())
     .pipe(rename({
       extname: '.min.js'

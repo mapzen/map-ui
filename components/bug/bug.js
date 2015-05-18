@@ -47,13 +47,13 @@ var MapzenBug = (function () {
   // Loads external stylesheet for the bug.
   // Ensures that it is placed before other defined stylesheets or style
   // blocks in the head, so that custom styles are allowed to override
-  function _loadExternalStylesheet () {
+  function _loadExternalStylesheet (stylesheetUrl) {
     var el = document.createElement('link')
     var firstStylesheet = document.head.querySelectorAll('link, style')[0]
 
     el.setAttribute('rel', 'stylesheet')
     el.setAttribute('type', 'text/css')
-    el.setAttribute('href', STYLESHEET)
+    el.setAttribute('href', stylesheetUrl)
 
     if (firstStylesheet !== 'undefined') {
       document.head.insertBefore(el, firstStylesheet)
@@ -179,9 +179,10 @@ var MapzenBug = (function () {
     opts = options || {}
     opts.analytics = (typeof options.analytics === 'undefined') ? true : options.analytics
     opts.name = options.name || null
+    opts.stylesheet = options.stylesheet || STYLESHEET
     this.opts = opts
 
-    _loadExternalStylesheet()
+    _loadExternalStylesheet(this.opts.stylesheet)
     this.el = _createElsAndAppend(this.opts)
     this.twitterEl = this.el.querySelector('.mz-bug-twitter-link')
     this.facebookEl = this.el.querySelector('.mz-bug-facebook-link')
