@@ -4,11 +4,11 @@
   "description": "mapzen ui",
   "private": true,
   "main": "index.js",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
     "dotenv": "^1.1.0",
     "gulp": "^3.8.11",
+    "gulp-jsonminify": "^1.0.0",
     "gulp-minify-css": "^1.1.1",
     "gulp-rename": "^1.2.2",
     "gulp-s3-upload": "^1.0.4",
