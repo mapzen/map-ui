@@ -18,8 +18,9 @@
 }
 
 .select2-container {
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
   display: block;
+  width: auto !important;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
 }
 
 .select2-container .select2-selection--single {
