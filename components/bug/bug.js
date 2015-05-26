@@ -3,10 +3,16 @@
 // MAPZEN BUG (or MAPZEN DOG in the UK)
 // http://en.wikipedia.org/wiki/Digital_on-screen_graphic
 //
-// Identifies full-screen demo pages with Mapzen brand and
-// provides helpful social media links.
-// --------------------------------------------------------
-/* global ga */
+// Identifies full-screen demo pages with Mapzen brand and provides helpful
+// social media links.
+// ----------------------------------------------------------------------------
+/* global module, ga */
+
+// Export as browserify module if present, otherwise, it is global to window
+if (typeof module === 'object' && typeof module.exports === 'object') {
+  module.exports = MapzenBug
+}
+
 var MapzenBug = (function () {
   'use strict'
 
@@ -171,6 +177,10 @@ var MapzenBug = (function () {
   }
 
   var MapzenBug = function (options) {
+    // nifty JS constructor pattern via browserify documentation
+    // https://github.com/substack/browserify-handbook#reusable-components
+    if (!(this instanceof MapzenBug)) return new MapzenBug(options)
+
     // If iframed, exit & do nothing.
     if (window.self !== window.top) {
       return false
