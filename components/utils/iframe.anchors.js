@@ -13,23 +13,19 @@
 // by Leaflet to make sure all attribution links open in
 // the parent tab / window.
 // --------------------------------------------------------
-var MPZN = (function (MPZN) {
+module.exports = function () {
   'use strict'
 
-  MPZN = MPZN || {}
-  MPZN.Utils = MPZN.Utils || {}
-
-  MPZN.Utils.iframedAnchors = function () {
-    if (window.self !== window.top) {
-      var anchors = document.querySelectorAll('a')
-      for (var i = 0, j = anchors.length; i < j; i++) {
-        var el = anchors[i]
-        if (!el.target) {
-          el.target = '_top'
-        }
+  // Only operate if iframed
+  if (window.self !== window.top) {
+    var anchors = document.querySelectorAll('a')
+    for (var i = 0, j = anchors.length; i < j; i++) {
+      var el = anchors[i]
+      // Only attach target when not explicitly specified
+      // to avoid overwriting intentional targeting behavior
+      if (!el.target) {
+        el.target = '_top'
       }
     }
   }
-
-  return MPZN
-})(MPZN)
+}
