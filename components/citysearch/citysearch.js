@@ -1,9 +1,14 @@
 // (c) 2015 Mapzen
 //
-// CITY SEARCH
-// --------------------------------------------------------
+// MAP UI · CITY SEARCH
+//
+// ----------------------------------------------------------------------------
 /* global jQuery, select2 */
-(function ($) {
+
+var $ = require('jquery')
+var select2 = require('select2')
+
+module.exports = (function () {
   'use strict'
 
   // Exit if demo is iframed.
@@ -101,4 +106,4 @@
       })
     })
   })
-})(jQuery)
+})()

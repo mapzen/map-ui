@@ -5,14 +5,12 @@
 // Bottom line is, don’t use target="_blank" in anchors.
 // Read more: https://css-tricks.com/use-target_blank/
 //
-// If you’re in an iframe, though, you may not want links
-// to open within the frame. The following code snippet
-// will add target="_top" to all links that do not have an
-// explicit target attribute, if the page is inside an
-// iframe. You should run it after, say, links are created
-// by Leaflet to make sure all attribution links open in
-// the parent tab / window.
-// --------------------------------------------------------
+// If you’re in an iframe, though, you may not want links to open within the
+// frame. The following code snippet will add target="_top" to all links that
+// do not have an explicit target attribute, if the page is inside an iframe.
+// You should run it after, say, links are created by Leaflet to make sure all
+// attribution links open in the parent tab / window.
+// ----------------------------------------------------------------------------
 module.exports = function () {
   'use strict'
 

@@ -1,10 +1,11 @@
 // (c) 2015 Mapzen
 //
-// MAPZEN GEOLOCATOR
+// MAP UI · GEOLOCATOR
 //
 // "Locate me" button for demos
-// --------------------------------------------------------
+// ----------------------------------------------------------------------------
 /* global map */
+
 var MapzenGeolocator = (function () {
   'use strict'
 

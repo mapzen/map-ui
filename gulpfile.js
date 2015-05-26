@@ -2,17 +2,22 @@
 
 require('dotenv').load()
 
+var browserify = require('browserify')
+var buffer = require('vinyl-buffer')
 var gulp = require('gulp')
+var gutil = require('gulp-util')
 var jsonminify = require('gulp-jsonminify')
 var minifyCSS = require('gulp-minify-css')
 var rename = require('gulp-rename')
+var source = require('vinyl-source-stream')
+var sourcemaps = require('gulp-sourcemaps')
 var uglify = require('gulp-uglify')
 var s3 = require('gulp-s3-upload')({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
 })
 
-gulp.task('default', ['css', 'js', 'images', 'json'])
+gulp.task('default', ['css', 'js-bug', 'js', 'images', 'json'])
 
 gulp.task('css', function () {
   return gulp.src(['components/**/*.css', '!components/**/vendor/**'])
@@ -23,13 +28,35 @@ gulp.task('css', function () {
     .pipe(gulp.dest('dist/components/'))
 })
 
-gulp.task('js', function () {
-  return gulp.src(['components/**/*.js', '!components/**/vendor/**'])
+gulp.task('js-bug', function () {
+  return gulp.src(['components/bug/bug.js'])
     .pipe(uglify())
     .pipe(rename({
       extname: '.min.js'
     }))
-    .pipe(gulp.dest('dist/components/'))
+    .pipe(gulp.dest('dist/components/bug/'))
+})
+
+gulp.task('js', function () {
+  var b = browserify({
+    entries: 'components/main.js',
+    debug: true
+  })
+
+  return b.bundle()
+    .pipe(source('components/main.js'))
+    .pipe(buffer())
+    .pipe(sourcemaps.init({ loadMaps: true }))
+      // Add transformation tasks to the pipeline here.
+      .pipe(uglify())
+      .pipe(rename({
+        dirname: '',
+        basename: 'mapzen-ui',
+        extname: '.min.js'
+      }))
+      .on('error', gutil.log)
+    .pipe(sourcemaps.write('./'))
+    .pipe(gulp.dest('dist/'));
 })
 
 gulp.task('json', function () {
