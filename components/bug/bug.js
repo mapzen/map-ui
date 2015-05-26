@@ -7,12 +7,6 @@
 // social media links.
 // ----------------------------------------------------------------------------
 /* global module, ga */
-
-// Export as browserify module if present, otherwise, it is global to window
-if (typeof module === 'object' && typeof module.exports === 'object') {
-  module.exports = MapzenBug
-}
-
 var MapzenBug = (function () {
   'use strict'
 
@@ -21,6 +15,7 @@ var MapzenBug = (function () {
   var DEFAULT_LINK = 'https://mapzen.com/'
   var DEFAULT_GITHUB_LINK = 'https://github.com/mapzen/'
   var TRACKING_CATEGORY = 'demo'
+  var ANALYTICS_PROPERTY_ID = 'UA-47035811-1'
 
   // Globals
   var opts
@@ -41,13 +36,15 @@ var MapzenBug = (function () {
   }
 
   function _loadAnalytics () {
+    /* eslint-disable */
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-    ga('create', 'UA-47035811-1', 'auto');
+    ga('create', ANALYTICS_PROPERTY_ID, 'auto');
     ga('send', 'pageview');
+    /* eslint-enable */
   }
 
   // Loads external stylesheet for the bug.
@@ -71,11 +68,11 @@ var MapzenBug = (function () {
   function _popupWindow (url, title, w, h) {
     // Borrowed from rrssb
     // Fixes dual-screen position                         Most browsers      Firefox
-    var dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : screen.left
-    var dualScreenTop = window.screenTop !== undefined ? window.screenTop : screen.top
+    var dualScreenLeft = window.screenLeft !== undefined ? window.screenLeft : window.screen.left
+    var dualScreenTop = window.screenTop !== undefined ? window.screenTop : window.screen.top
 
-    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width
-    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height
+    var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : window.screen.width
+    var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : window.screen.height
 
     var left = ((width / 2) - (w / 2)) + dualScreenLeft
     var top = ((height / 3) - (h / 3)) + dualScreenTop
@@ -233,3 +230,10 @@ var MapzenBug = (function () {
 
   return MapzenBug
 }())
+
+// Export as browserify module if present, otherwise, it is global to window
+if (typeof module === 'object' && typeof module.exports === 'object') {
+  module.exports = MapzenBug
+} else {
+  window.MapzenBug = MapzenBug
+}
