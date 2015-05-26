@@ -27,6 +27,12 @@ Insert the script into your demo's HTML markup:
 Instantiate the bug component in JavaScript:
 
 ```js
+MapzenBug();
+```
+
+You could also assign it to a variable for later use programatically:
+
+```js
 var mzBug = new MapzenBug();
 ```
 

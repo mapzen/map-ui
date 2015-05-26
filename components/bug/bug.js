@@ -186,10 +186,20 @@ var MapzenBug = (function () {
       return false
     }
 
-    opts = options || {}
-    opts.analytics = (typeof options.analytics === 'undefined') ? true : options.analytics
-    opts.name = options.name || null
-    opts.stylesheet = options.stylesheet || STYLESHEET
+    // Default options
+    opts = {
+      analytics: true,
+      name: null,
+      stylesheet: STYLESHEET
+    }
+
+    // Copy options values
+    if (typeof options === 'object') {
+      for (var i in options) {
+        opts[i] = options[i]
+      }
+    }
+
     this.opts = opts
 
     _loadExternalStylesheet(this.opts.stylesheet)
