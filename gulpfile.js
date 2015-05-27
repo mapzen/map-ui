@@ -20,16 +20,16 @@ var s3 = require('gulp-s3-upload')({
 gulp.task('default', ['css', 'js-bug', 'js', 'images', 'json'])
 
 gulp.task('css', function () {
-  return gulp.src(['components/**/*.css', '!components/**/vendor/**'])
+  return gulp.src(['src/**/*.css', '!src/**/vendor/**'])
     .pipe(minifyCSS({ keepSpecialComments: 0 }))
     .pipe(rename({
       extname: '.min.css'
     }))
-    .pipe(gulp.dest('dist/components/'))
+    .pipe(gulp.dest('dist/'))
 })
 
 gulp.task('js-bug', function () {
-  return gulp.src(['components/bug/bug.js'])
+  return gulp.src(['src/components/bug/bug.js'])
     .pipe(uglify())
     .pipe(rename({
       extname: '.min.js'
@@ -39,13 +39,19 @@ gulp.task('js-bug', function () {
 
 gulp.task('js', function () {
   var b = browserify({
-    entries: 'components/main.js',
+    entries: 'src/main.js',
     debug: true
   })
 
   return b.bundle()
-    .pipe(source('components/main.js'))
+    .pipe(source('src/main.js'))
     .pipe(buffer())
+    // Copy of unminified JS
+    .pipe(rename({
+      dirname: '',
+      basename: 'mapzen-ui',
+    }))
+    .pipe(gulp.dest('dist/'))
     .pipe(sourcemaps.init({ loadMaps: true }))
       // Add transformation tasks to the pipeline here.
       .pipe(uglify())
@@ -56,18 +62,18 @@ gulp.task('js', function () {
       }))
       .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('dist/'));
+    .pipe(gulp.dest('dist/'))
 })
 
 gulp.task('json', function () {
-  return gulp.src('components/**/*.json')
+  return gulp.src('src/**/*.json')
     .pipe(jsonminify())
-    .pipe(gulp.dest('dist/components'))
+    .pipe(gulp.dest('dist/'))
 })
 
 gulp.task('images', function () {
-  return gulp.src('components/**/*.png')
-    .pipe(gulp.dest('dist/components/'))
+  return gulp.src('src/**/*.png')
+    .pipe(gulp.dest('dist/'))
 })
 
 gulp.task('publish', function () {

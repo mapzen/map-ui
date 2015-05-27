@@ -29,7 +29,7 @@ var DEBUG = true
 
 function debug (message) {
   if (DEBUG === true) {
-    console.log('MPZN ZoomControl:', message)
+    console.log('MPZN ZoomControl: ' + message)
   }
 }
 
