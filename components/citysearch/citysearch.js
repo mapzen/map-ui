@@ -14,6 +14,7 @@ module.exports = (function () {
   // Exit if demo is iframed.
   if (window.self !== window.top) return false
 
+  var SELECT2_STYLESHEET = '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css'
   var STYLESHEET = '//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/citysearch.min.css'
   var CITY_DATA_URL = '//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/cities.json'
   var CITY_DATA
@@ -58,6 +59,7 @@ module.exports = (function () {
     document.head.appendChild(el)
   }
 
+  _loadExternalStylesheet(SELECT2_STYLESHEET)
   _loadExternalStylesheet(STYLESHEET)
   _createElsAndAppend()
   _adjustLeafletUI()

@@ -6,7 +6,7 @@
   "main": "index.js",
   "dependencies": {
     "jquery": "^1.11.3",
-    "select2": "^3.5.2-browserify"
+    "select2": "https://github.com/select2/select2.git"
   },
   "devDependencies": {
     "browserify": "^10.2.1",
@@ -19,11 +19,12 @@
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
     "gulp-util": "^3.0.4",
+    "jquery.mousewheel": "^3.1.9",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "local": "http-server dist -p 4000",
+    "start": "http-server dist -p 4000",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
