@@ -10,8 +10,8 @@
 var bug = require('./components/bug/bug')
 var citysearch = require('./components/citysearch/citysearch')
 var geolocator = require('./components/geolocator/geolocator')
-var zoomcontrol = require('./components/zoomcontrol')
-var iframedAnchors = require('./components/utils/iframe.anchors.js')
+var zoomControl = require('./components/utils/zoom-control')
+var anchorTargets = require('./components/utils/anchor-targets')
 
 // Export
 module.exports = (function () {
@@ -19,15 +19,19 @@ module.exports = (function () {
     bug: bug,
     citysearch: citysearch,
     geolocator: geolocator,
-    zoomcontrol: zoomcontrol,
     Utils: {
-      iframedAnchors: iframedAnchors
+      anchorTargets: anchorTargets,
+      zoomControl: zoomControl,
     }
   }
 
   // Do stuff
-  MPZN.zoomcontrol()
-  MPZN.Utils.iframedAnchors()
+  MPZN.Utils.zoomControl()
+
+  // Only operate if iframed
+  if (window.self !== window.top) {
+    MPZN.Utils.anchorTargets()
+  }
 
   // Expose for external access
   window.MPZN = MPZN
