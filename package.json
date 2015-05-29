@@ -24,8 +24,9 @@
     "vinyl-source-stream": "^1.1.0"
   },
   "scripts": {
-    "start": "http-server dist -p 4000",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run local",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "local": "http-server dist -p 4000"
   },
   "repository": {
     "type": "git",

@@ -183,24 +183,10 @@ var MapzenBug = (function () {
       return false
     }
 
-    // Default options
-    opts = {
-      analytics: true,
-      name: null,
-      stylesheet: STYLESHEET
-    }
-
-    // Copy options values
-    if (typeof options === 'object') {
-      for (var i in options) {
-        opts[i] = options[i]
-      }
-    }
-
-    this.opts = opts
+    this.setOptions(options)
 
     _loadExternalStylesheet(this.opts.stylesheet)
-    this.el = _createElsAndAppend(this.opts)
+    this.el = _createElsAndAppend()
     this.twitterEl = this.el.querySelector('.mz-bug-twitter-link')
     this.facebookEl = this.el.querySelector('.mz-bug-facebook-link')
 
@@ -226,6 +212,32 @@ var MapzenBug = (function () {
   MapzenBug.prototype.rebuildLinks = function () {
     this.twitterEl.href = _buildTwitterLink()
     this.facebookEl.href = _buildFacebookLink()
+  }
+
+  MapzenBug.prototype.hide = function () {
+    this.el.style.display = 'none'
+  }
+
+  MapzenBug.prototype.show = function () {
+    this.el.style.display = 'block'
+  }
+
+  MapzenBug.prototype.setOptions = function (options) {
+    // Default options
+    opts = opts || {
+      analytics: true,
+      name: null,
+      stylesheet: STYLESHEET
+    }
+
+    // Copy options values
+    if (typeof options === 'object') {
+      for (var i in options) {
+        opts[i] = options[i]
+      }
+    }
+
+    this.opts = opts
   }
 
   return MapzenBug

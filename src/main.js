@@ -7,7 +7,7 @@
 /* global require, module */
 'use strict'
 
-var bug = require('./components/bug/bug')
+var Bug = require('./components/bug/bug')
 var citysearch = require('./components/citysearch/citysearch')
 var geolocator = require('./components/geolocator/geolocator')
 var zoomControl = require('./components/utils/zoom-control')
@@ -16,7 +16,7 @@ var anchorTargets = require('./components/utils/anchor-targets')
 // Export
 module.exports = (function () {
   var MPZN = {
-    bug: bug,
+    bug: new Bug(),
     citysearch: citysearch,
     geolocator: geolocator,
     Utils: {
