@@ -89,4 +89,8 @@
   .select2-container .select2-selection--single .select2-selection__rendered {
     display: none;
   }
+
+  .mz-citysearch.js--mz-citysearch-expanded .select2-selection--single .select2-selection__rendered {
+    display: block;
+  }
 }
