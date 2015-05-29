@@ -16,7 +16,8 @@ var anchorTargets = require('./components/utils/anchor-targets')
 // Export
 module.exports = (function () {
   var MPZN = {
-    bug: new Bug(),
+    //bug: new Bug(),
+    bug: Bug,
     citysearch: citysearch,
     geolocator: geolocator,
     Utils: {

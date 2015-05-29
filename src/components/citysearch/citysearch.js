@@ -16,6 +16,7 @@ module.exports = (function () {
 
   var SELECT2_STYLESHEET = '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css'
   var STYLESHEET = '//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/citysearch.min.css'
+  STYLESHEET = 'http://localhost:4000/components/citysearch/citysearch.min.css'
   var CITY_DATA_URL = '//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/cities.json'
   var CITY_DATA
 
@@ -53,7 +54,7 @@ module.exports = (function () {
 
   function _adjustLeafletUI() {
     var el = document.createElement('style')
-    var css = '.leaflet-top.leaflet-left { top: 42px; }'
+    var css = '.leaflet-top.leaflet-left { top: 72px; }'
     el.type = 'text/css'
     el.appendChild(document.createTextNode(css))
     document.head.appendChild(el)
@@ -61,7 +62,7 @@ module.exports = (function () {
 
   _loadExternalStylesheet(SELECT2_STYLESHEET)
   _loadExternalStylesheet(STYLESHEET)
-  _createElsAndAppend()
+  var el = _createElsAndAppend()
   _adjustLeafletUI()
 
   $.get(CITY_DATA_URL, function (data) {
@@ -83,6 +84,15 @@ module.exports = (function () {
 
       $select.select2({
         placeholder: 'Search'
+      })
+
+      // Add a class to set it to the expanded state
+      $select.on('select2:opening', function (e) {
+        el.classList.add('js--mz-citysearch-expanded')
+      })
+
+      $select.on('select2:close', function (e) {
+        el.classList.remove('js--mz-citysearch-expanded')
       })
 
       // Input into the search field should not bubble up and
