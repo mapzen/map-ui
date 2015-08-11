@@ -38,13 +38,15 @@ Included components:
 
 [You can't detect a touchscreen.](http://www.stucox.com/blog/you-cant-detect-a-touchscreen/)
 
-Leaflet, however, does attempt to do so for its own purposes, and so for touchscreens it adds a `leaflet-touch` class on the map container element. Most of the time, it should be enough to defer to Leaflet's touch detection, and use the presence of this class as a hook to attach special touch-enabled interaction logic to. To hide zoom buttons on touch devices, then, you can include this CSS:
+While the edge cases are enough to make it hard to programatically define a clear-cut distinction,  Leaflet does [attempt to detect touch capability](https://github.com/Leaflet/Leaflet/blob/c016634bb1da9006e385f8c38d2d119c8c3cb879/src/core/Browser.js#L27-L28) for its own purposes (similar to [Modernizr's test for touch events](https://github.com/Modernizr/Modernizr/blob/347ddb078116cee91b25b6e897e211b023f9dcb4/feature-detects/touchevents.js)), and so when touch and pointer events are found it adds a `leaflet-touch` class on the map container element. Most of the time, it should be enough for us to defer to Leaflet's touch detection, and use the presence of this class as a hook to attach special touch-enabled interaction logic to, and this ensures that our touch-specific map functionality is tied more closely to whenever Leaflet is also making that decision. To hide zoom buttons on touch devices, then, you can include this CSS:
 
 ```css
 .leaflet-touch .leaflet-control-zoom {
   display: none;
 }
 ```
+
+Touch detection should be used to enhance or augment an interface for fat fingers. It should not assume anything else: that the user does not have other pointer or input devices attached (they might), or that they are on a mobile device (they might not be), or that the user knows about touch gestures that are not obvious (or discoverable; maybe in a few years we can make different assumptions about this).
 
 ## Components
 
