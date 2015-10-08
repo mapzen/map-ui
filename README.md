@@ -9,7 +9,7 @@ Adds map UI components to Mapzen demos. Currently it assumes a globally accessib
 
 Add script to your demo:
 ```html
-<script src='//s3.amazonaws.com/assets-staging.mapzen.com/ui/mapzen-ui.min.js'></script>
+<script src='https://s3.amazonaws.com/assets-staging.mapzen.com/ui/mapzen-ui.min.js'></script>
 ```
 
 Initialize components:
