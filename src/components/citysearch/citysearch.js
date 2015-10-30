@@ -19,7 +19,7 @@ module.exports = (function () {
   var CITY_DATA_URL = '//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/cities.json'
   var CITY_DATA
 
-  var CITY_SELECT_PLACEHOLDER_TEXT = 'Search'
+  var CITY_SELECT_PLACEHOLDER_TEXT = 'Search for city'
 
   function _loadExternalStylesheet (stylesheetUrl) {
     var el = document.createElement('link')
