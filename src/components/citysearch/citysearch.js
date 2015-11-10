@@ -6,7 +6,7 @@
 /* global jQuery, select2 */
 
 var $ = require('jquery')
-var select2 = require('select2')
+var select2 = require('Select2')
 
 module.exports = (function () {
   'use strict'
