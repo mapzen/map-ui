@@ -1,3 +1,4 @@
 node_modules/
+dist/ui/
 npm-debug.log
 .env
