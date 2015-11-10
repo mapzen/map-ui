@@ -5,14 +5,13 @@
   "private": true,
   "main": "index.js",
   "dependencies": {
+    "Select2": "git+https://github.com/select2/select2.git",
     "jquery": "^1.11.3",
     "jquery.mousewheel": "^3.1.9",
-    "leaflet-hash": "^0.2.1",
-    "select2": "https://github.com/select2/select2.git"
+    "leaflet-hash": "^0.2.1"
   },
   "devDependencies": {
     "browserify": "^10.2.1",
-    "dotenv": "^1.1.0",
     "gulp": "^3.8.11",
     "gulp-jsonminify": "^1.0.0",
     "gulp-minify-css": "^1.1.1",
@@ -26,7 +25,7 @@
   },
   "scripts": {
     "start": "npm run local",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"No tests\" && exit 0",
     "local": "http-server dist -p 4000"
   },
   "repository": {
@@ -37,6 +36,9 @@
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mapzen/ui/issues"
+  },
+  "jshintConfig": {
+    "node": true
   },
   "homepage": "https://github.com/mapzen/ui"
 }
