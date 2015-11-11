@@ -74,19 +74,7 @@ gulp publish
 
 ### leaflet-hash.js
 
-Michael Evan's excellent [leaflet-hash](https://github.com/mlevans/leaflet-hash) library, which addresses point #1 on [Stamen's Checklist for Maps](http://content.stamen.com/stamens-checklist-for-maps), is a core part of map UI for every Mapzen demo. Currently there does not appear to be a public CDN for this library, so we are serving our own here. Include this URL:
-
-```
-https://s3.amazonaws.com/assets-staging.mapzen.com/ui/libraries/leaflet-hash/0.2.1/leaflet-hash.js
-```
-
-Without the version number also works if you want to always use the latest version, but this library hasn't been updated in two years (so updates in the near future are unlikely) and there's not an automated way to update this yet anyway.
-
-```
-https://s3.amazonaws.com/assets-staging.mapzen.com/ui/libraries/leaflet-hash/leaflet-hash.js
-```
-
-
+Michael Evan's excellent [leaflet-hash](https://github.com/mlevans/leaflet-hash) library, which addresses point #1 on [Stamen's Checklist for Maps](http://content.stamen.com/stamens-checklist-for-maps), is a core part of map UI for every Mapzen demo. [There is now a public CDN for this library](https://cdnjs.com/libraries/leaflet-hash), and you can also [install as an npm module](https://www.npmjs.com/package/leaflet-hash).
 
 ## Live mockups
 
