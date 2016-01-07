@@ -6,7 +6,7 @@
 /* global jQuery, select2 */
 
 var $ = require('jquery')
-var select2 = require('Select2')
+var select2 = require('select2')
 
 module.exports = (function () {
   'use strict'
@@ -14,9 +14,9 @@ module.exports = (function () {
   // Exit if demo is iframed.
   if (window.self !== window.top) return false
 
-  var SELECT2_STYLESHEET = '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css'
-  var STYLESHEET = '//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/citysearch.min.css'
-  var CITY_DATA_URL = '//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/cities.json'
+  var SELECT2_STYLESHEET = 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css'
+  var STYLESHEET = 'https://s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/citysearch.min.css'
+  var CITY_DATA_URL = 'https://s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/cities.json'
   var CITY_DATA
 
   var CITY_SELECT_PLACEHOLDER_TEXT = 'Search for city'
