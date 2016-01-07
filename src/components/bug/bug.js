@@ -10,8 +10,7 @@
 var MapzenBug = (function () {
   'use strict'
 
-  var protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:'
-  var STYLESHEET = protocol + '//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/bug.min.css'
+  var STYLESHEET = 'https://mapzen.com/common/ui/components/bug/bug.min.css'
   var DEFAULT_LINK = 'https://mapzen.com/'
   var DEFAULT_GITHUB_LINK = 'https://github.com/mapzen/'
   var TRACKING_CATEGORY = 'demo'

@@ -15,8 +15,8 @@ module.exports = (function () {
   if (window.self !== window.top) return false
 
   var SELECT2_STYLESHEET = 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css'
-  var STYLESHEET = 'https://s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/citysearch.min.css'
-  var CITY_DATA_URL = 'https://s3.amazonaws.com/assets-staging.mapzen.com/ui/components/citysearch/cities.json'
+  var STYLESHEET = 'https:https://mapzen.com/common/ui/components/citysearch/citysearch.min.css'
+  var CITY_DATA_URL = 'https:https://mapzen.com/common/ui/components/citysearch/cities.json'
   var CITY_DATA
 
   var CITY_SELECT_PLACEHOLDER_TEXT = 'Search for city'

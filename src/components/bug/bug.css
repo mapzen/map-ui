@@ -53,12 +53,12 @@
 
 .mz-bug-mapzen-link:hover .mz-bug-mapzen-logo,
 .mz-bug-mapzen-link:active .mz-bug-mapzen-logo {
-  background-image: url(//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/logo.png);
+  background-image: url(https://mapzen.com/common/ui/components/bug/logo.png);
   background-position: 0 0;
 }
 
 .mz-bug-mapzen-logo {
-  background-image: url(//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/logo.png);
+  background-image: url(https://mapzen.com/common/ui/components/bug/logo.png);
   background-repeat: no-repeat;
   background-size: 100%;
   background-position: 0 -48px;
@@ -80,12 +80,12 @@
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
   .mz-bug-mapzen-link:hover .mz-bug-mapzen-logo,
   .mz-bug-mapzen-link:active .mz-bug-mapzen-logo {
-    background-image: url(//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/logo@2x.png);
+    background-image: url(https://mapzen.com/common/ui/components/bug/logo@2x.png);
     background-position: 0 0;
   }
 
   .mz-bug-mapzen-logo {
-    background-image: url(//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/logo@2x.png);
+    background-image: url(https://mapzen.com/common/ui/components/bug/logo@2x.png);
     background-position: 0 -48px;
   }
 }

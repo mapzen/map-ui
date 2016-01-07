@@ -21,7 +21,7 @@ Insert the script into your demo's HTML markup:
 
 ```html
 <!-- Mapzen bug UI component -->
-<script src='//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/bug/bug.min.js'></script>
+<script src='https://mapzen.com/common/ui/components/bug/bug.min.js'></script>
 ```
 
 Instantiate the bug component in JavaScript:

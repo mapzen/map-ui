@@ -11,8 +11,7 @@ var MapzenGeolocator = (function () {
 
   var latitude
   var longitude
-  var protocol = (window.location.protocol === 'https:') ? 'https:' : 'http:'
-  var STYLESHEET = protocol + '//s3.amazonaws.com/assets-staging.mapzen.com/ui/components/geolocator/geolocator.min.css'
+  var STYLESHEET = 'https://mapzen.com/common/ui/components/geolocator/geolocator.min.css'
 
   var GEOLOCATOR_TITLE_TEXT = 'Get current location'
 
