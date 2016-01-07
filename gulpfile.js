@@ -5,7 +5,7 @@ var buffer = require('vinyl-buffer');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var jsonminify = require('gulp-jsonminify');
-var minifyCSS = require('gulp-minify-css');
+var cssnano = require('gulp-cssnano');
 var rename = require('gulp-rename');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
@@ -16,7 +16,7 @@ gulp.task('default', ['css', 'js-bug', 'js', 'images', 'json']);
 
 gulp.task('css', function () {
   return gulp.src(['src/**/*.css', '!src/**/vendor/**'])
-    .pipe(minifyCSS({ keepSpecialComments: 0 }))
+    .pipe(cssnano())
     .pipe(rename({
       extname: '.min.css'
     }))
