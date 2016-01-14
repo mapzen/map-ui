@@ -16,7 +16,6 @@ module.exports = (function () {
 
   var SELECT2_STYLESHEET = 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css'
   var STYLESHEET = 'https://mapzen.com/common/ui/components/citysearch/citysearch.min.css'
-  // Reference S3 path directly for CORS access
   var CITY_DATA_URL = 'https://mapzen.com/common/ui/components/citysearch/cities.json'
   var CITY_DATA
 
