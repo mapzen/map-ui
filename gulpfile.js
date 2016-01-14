@@ -16,7 +16,9 @@ gulp.task('default', ['css', 'js-bug', 'js', 'images', 'json']);
 
 gulp.task('css', function () {
   return gulp.src(['src/**/*.css', '!src/**/vendor/**'])
-    .pipe(cssnano())
+    .pipe(cssnano({
+      zindex: false // Do not allow postcss to rebase z-index values
+    }))
     .pipe(rename({
       extname: '.min.css'
     }))
