@@ -14,6 +14,10 @@ var s3 = require('gulp-s3-upload')(); // load access keys from ~/.aws/credential
 
 gulp.task('default', ['css', 'js-bug', 'js', 'images', 'json']);
 
+gulp.task('watch', function() {
+  gulp.watch('src/**/*', ['default']);
+});
+
 gulp.task('css', function () {
   return gulp.src(['src/**/*.css', '!src/**/vendor/**'])
     .pipe(cssnano({
