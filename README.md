@@ -20,6 +20,8 @@ MPZN.bug({
   tweet: 'Tangram: real-time WebGL maps from @mapzen',
   repo: 'https://github.com/tangrams/tangram'
 });
+MPZN.citysearch();
+MPZN.geolocator();
 ```
 
 Included components:
@@ -27,6 +29,26 @@ Included components:
 - Bug (branding, social sharing, tracking UI)
 - City search dropdown
 - Geolocation
+
+By default, all elements will be hidden if the demo is inside an iframe, and shown otherwise. To force the elements to show inside an iframe:
+
+```js
+MPZN.bug({
+	bug(true)
+});
+MPZN.citysearch(true);
+MPZN.geolocator(true);
+```
+
+And to force an element to be hidden when not in an iframe:
+
+```js
+MPZN.bug({
+	bug(false)
+});
+MPZN.citysearch(false);
+MPZN.geolocator(false);
+```
 
 ### Baseline UI standards
 

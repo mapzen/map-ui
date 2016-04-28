@@ -177,8 +177,13 @@ var MapzenBug = (function () {
     // https://github.com/substack/browserify-handbook#reusable-components
     if (!(this instanceof MapzenBug)) return new MapzenBug(options)
 
-    // If iframed, exit & do nothing.
-    if (window.self !== window.top) {
+    // If iframed and bug isn't explicitly activated, exit & do nothing.
+    if (window.self !== window.top && options.bug !== true) {
+      return false
+    }
+
+    // If bug turned off in options, exit & do nothing.
+    if (options.bug == false) {
       return false
     }
 
