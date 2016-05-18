@@ -20,6 +20,7 @@ var MapzenGeolocator = (function () {
 
   _createElAndAppend()
   _loadExternalStylesheet(STYLESHEET)
+  _adjustLeafletUI()
 
   // PLACEHOLDER
   var MapzenGeolocator = function (mapObj, options) {
@@ -30,6 +31,14 @@ var MapzenGeolocator = (function () {
     el.setAttribute('rel', 'stylesheet')
     el.setAttribute('type', 'text/css')
     el.setAttribute('href', stylesheetUrl)
+    document.head.appendChild(el)
+  }
+
+  function _adjustLeafletUI() {
+    var el = document.createElement('style')
+    var css = '#mz-geolocator { top: 126px; }'
+    el.type = 'text/css'
+    el.appendChild(document.createTextNode(css))
     document.head.appendChild(el)
   }
 

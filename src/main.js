@@ -16,13 +16,27 @@ var anchorTargets = require('./components/utils/anchor-targets')
 // Export
 module.exports = (function () {
   var MPZN = {
-    //bug: new Bug(),
-    bug: Bug,
     citysearch: citysearch,
     geolocator: geolocator,
     Utils: {
       anchorTargets: anchorTargets,
       zoomControl: zoomControl,
+    }
+  }
+
+  MPZN.bug = function (options) {
+    Bug(options)
+
+    var leafletMap
+
+    // Is there a window.map thing and is it a Leaflet instance?
+    if (window.map && window.map._container && window.map._container instanceof HTMLElement) {
+      leafletMap = window.map
+    }
+
+    if (options.search !== false) {
+      var searchOpts = options.search || {}
+      citysearch.init(searchOpts, leafletMap)
     }
   }
 
