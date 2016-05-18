@@ -1,18 +1,16 @@
-mapzen ui
-=========
+mapzen map scarab
+=================
 
-## Map UI
-
-**Work in progress**
-
-Adds map UI components to Mapzen demos. Currently it assumes a globally accessible `map` object that is a Leaflet instance.
+this adds common ui elements for map demos made by mapzen. currently it assumes a globally accessible `map` object that is a Leaflet instance.
 
 Add script to your demo:
+
 ```html
 <script src='https://mapzen.com/common/ui/mapzen-ui.min.js'></script>
 ```
 
 Initialize components:
+
 ```js
 MPZN.bug({
   name: 'Tangram',
@@ -25,7 +23,7 @@ MPZN.bug({
 Included components:
 
 - Bug (branding, social sharing, tracking UI)
-- City search dropdown
+- Mapzen Search
 - Geolocation
 
 ### Baseline UI standards
@@ -39,6 +37,26 @@ Included components:
 ### Bug (separate module)
 
 Branding, social sharing, and tracking UI component for standalone demos. [[separate module](https://github.com/mapzen/ui/tree/master/src/components/bug)]
+
+### Mapzen Search
+
+This installs the [Leaflet geocoder](https://github.com/mapzen/leaflet-geocoder) plugin. By default it is on if the page is not iframed and it is off if the page is iframed.
+
+You can turn it off always by adding this option:
+
+```js
+MPZN.bug({
+  search: false
+});
+```
+
+You can turn it on always, even when iframed, by adding this option:
+
+```js
+MPZN.bug({
+  search: true
+});
+```
 
 ## Building
 
@@ -65,13 +83,3 @@ To publish to S3: (env variables containing S3 credentials are expected)
 ```shell
 gulp publish
 ```
-
-## Third party libraries
-
-### leaflet-hash.js
-
-Michael Evan's excellent [leaflet-hash](https://github.com/mlevans/leaflet-hash) library, which addresses point #1 on [Stamen's Checklist for Maps](http://content.stamen.com/stamens-checklist-for-maps), is a core part of map UI for every Mapzen demo. [There is now a public CDN for this library](https://cdnjs.com/libraries/leaflet-hash), and you can also [install as an npm module](https://www.npmjs.com/package/leaflet-hash).
-
-## Live mockups
-
-Demo pages: please check out `gh-pages` branch.
