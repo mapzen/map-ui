@@ -36,12 +36,15 @@
       attribution: '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap contributors</a>'
     }).addTo(map);
 
+    var hash = new L.Hash(map)
+
     // Mapzen UI
     MPZN.bug({
       name: 'Mapzen UI',
       tweet: 'Don’t tweet this',
       repo: 'https://github.com/mapzen/ui',
-      // search: true
+      // search: true,
+      // locate: false
     });
   </script>
 </body>
