@@ -58,6 +58,26 @@ MPZN.bug({
 });
 ```
 
+### Locate me
+
+This installs the [Leaflet.Locate](https://github.com/domoritz/leaflet-locatecontrol) plugin. By default it is on if the page is not iframed and it is off if the page is iframed.
+
+You can turn it off always by adding this option:
+
+```js
+MPZN.bug({
+  locate: false
+});
+```
+
+You can turn it on always, even when iframed, by adding this option:
+
+```js
+MPZN.bug({
+  locate: true
+});
+```
+
 ## Building
 
 Install `npm` and dependencies, then:
