@@ -34,10 +34,7 @@ module.exports = (function () {
       leafletMap = window.map
     }
 
-    if (options.search !== false) {
-      var searchOpts = options.search || {}
-      citysearch.init(searchOpts, leafletMap)
-    }
+    citysearch.init(options.search, leafletMap)
   }
 
   // Do stuff
