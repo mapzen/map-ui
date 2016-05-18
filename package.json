@@ -2,10 +2,26 @@
   "name": "mapzen-scarab",
   "version": "1.0.0",
   "description": "mapzen mab scarab",
+  "homepage": "https://github.com/mapzen/scarab",
   "private": true,
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mapzen/scarab.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mapzen/scarab/issues"
+  },
+  "author": "",
+  "license": "MIT",
+  "scripts": {
+    "start": "npm run local",
+    "test": "echo \"No tests\" && exit 0",
+    "local": "http-server dist -p 4000"
+  },
   "dependencies": {
-    "leaflet-geocoder-mapzen": "1.6.0"
+    "leaflet-geocoder-mapzen": "1.6.0",
+    "leaflet.locatecontrol": "0.52.0"
   },
   "devDependencies": {
     "browserify": "13.0.1",
@@ -20,24 +36,6 @@
     "vinyl-buffer": "1.0.0",
     "vinyl-source-stream": "1.1.0"
   },
-  "scripts": {
-    "start": "npm run local",
-    "test": "echo \"No tests\" && exit 0",
-    "local": "http-server dist -p 4000"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mapzen/scarab.git"
-  },
-  "author": "",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mapzen/scarab/issues"
-  },
-  "jshintConfig": {
-    "node": true
-  },
-  "homepage": "https://github.com/mapzen/scarab",
   "browserify-shim": {
     "leaflet": "global:L"
   }
