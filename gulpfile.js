@@ -84,12 +84,12 @@ gulp.task('publish', function () {
   } else {
     s3bucket = process.env.MAPZEN_DEV_BUCKET;
   }
-  return gulp.src('dist/**')
+  return gulp.src('dist/ui/**')
     .pipe(s3({
       Bucket: s3bucket,
       ACL: 'public-read',
       keyTransform: function (relative_filename) {
-        return 'common/' + relative_filename;
+        return 'common/ui/' + relative_filename;
       }
     }));
 });

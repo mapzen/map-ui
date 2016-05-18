@@ -1,18 +1,14 @@
 machine:
   node:
-    version: 5.0.0
+    version: 6.1.0
 
 dependencies:
   post:
     - npm install -g gulp-cli && gulp
 
 deployment:
-  staging:
+  production:
     branch: master
     commands:
-      - gulp publish --target dev
-
-  production:
-    branch: production
-    commands:
       - gulp publish --target prod
+      - gulp publish --target dev
