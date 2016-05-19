@@ -1,120 +1,97 @@
 // (c) 2015 Mapzen
 //
-// MAP UI · CITY SEARCH
+// MAP UI · CITY SEARCH v2
 //
 // ----------------------------------------------------------------------------
-/* global jQuery, select2 */
+var utils = require('../common/utils')
 
-var $ = require('jquery')
-var select2 = require('select2')
+module.exports = {
+  init: function (options, map) {
+    /* global map */
+    'use strict'
 
-module.exports = (function () {
-  'use strict'
+    // Handle `options` parameter
+    // If `options` is undefined, make it an empty object
+    // If `options` is boolean, set options.show property
+    // This allows for future syntax where options is an object
+    if (options === true) {
+      options = {
+        show: true
+      }
+    } else if (options === false) {
+      options = {
+        show: false
+      }
+    } else if (typeof options === 'undefined') {
+      options = {}
+    }
 
-  // Exit if demo is iframed.
-  if (window.self !== window.top) return false
+    // Exit if demo is iframed & not forced to be turned on
+    if (window.self !== window.top && options.show !== true) return false
 
-  var SELECT2_STYLESHEET = 'https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.1/css/select2.min.css'
-  var STYLESHEET = 'https://mapzen.com/common/ui/components/citysearch/citysearch.min.css'
-  var CITY_DATA_URL = 'https://mapzen.com/common/ui/components/citysearch/cities.json'
-  var CITY_DATA
+    // Exit if forced to be turned off
+    if (options.show === false) return false
 
-  var CITY_SELECT_PLACEHOLDER_TEXT = 'Search for city'
+    require('leaflet-geocoder-mapzen')
 
-  function _loadExternalStylesheet (stylesheetUrl) {
-    var el = document.createElement('link')
-    el.setAttribute('rel', 'stylesheet')
-    el.setAttribute('type', 'text/css')
-    el.setAttribute('href', stylesheetUrl)
-    document.head.appendChild(el)
-  }
+    // Load external stylesheet
+    var STYLESHEET = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.6.0/leaflet-geocoder-mapzen.min.css'
+    utils.loadExternalStylesheet(STYLESHEET)
 
-  function _createElsAndAppend () {
-    // Create city locator
-    var el = document.createElement('div')
-    var selectEl = document.createElement('select')
-    var optionEl = document.createElement('option')
-    var optionText = document.createTextNode(CITY_SELECT_PLACEHOLDER_TEXT)
+    var DEMO_API_KEY = 'search-MKZrG6M'
 
-    optionEl.setAttribute('disabled', '')
-    optionEl.setAttribute('selected', '')
-    optionEl.appendChild(optionText)
+    var geocoderOptions = {
+      expanded: true,
+      layers: ['coarse'],
+      placeholder: 'Search for city',
+      title: 'Search for city',
+      pointIcon: false,
+      polygonIcon: false,
+      markers: false,
+      params: {
+        sources: 'wof'
+      }
+    }
 
-    selectEl.className = 'js--mz-citysearch-select2'
-    selectEl.appendChild(optionEl)
+    var geocoder = L.control.geocoder(DEMO_API_KEY, geocoderOptions).addTo(map)
 
-    el.id = 'mz-citysearch'
-    el.className = 'mz-citysearch'
-    el.appendChild(selectEl)
+    // Re-sort control order so that geocoder is on top
+    // geocoder._container is a reference to the geocoder's DOM element.
+    geocoder._container.parentNode.insertBefore(geocoder._container, geocoder._container.parentNode.childNodes[0])
 
-    document.body.appendChild(el)
-    return el
-  }
+    // Handle when viewport is smaller
+    window.addEventListener('resize', checkResize)
+    checkResize() // Check on load
 
-  function _adjustLeafletUI() {
-    var el = document.createElement('style')
-    var css = '.leaflet-top.leaflet-left { top: 72px; }'
-    el.type = 'text/css'
-    el.appendChild(document.createTextNode(css))
-    document.head.appendChild(el)
-  }
+    var isListening = false
 
-  _loadExternalStylesheet(SELECT2_STYLESHEET)
-  _loadExternalStylesheet(STYLESHEET)
-  var el = _createElsAndAppend()
-  _adjustLeafletUI()
+    function checkResize (event) {
+      var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : window.screen.width
 
-  $.get(CITY_DATA_URL, function (data) {
-    // Process data
-    CITY_DATA = data.map(function (item) {
-      return {
-        name: item.n,
-        lat: item.l.split('/')[0],
-        lng: item.l.split('/')[1],
-        zoom: item.z
+      if (width < 900) {
+        // Do these checks to make sure collapse / expand events don't fire continuously
+        if (L.DomUtil.hasClass(geocoder._container, 'leaflet-pelias-expanded')) {
+          geocoder.collapse()
+          map.off('mousedown', geocoder.collapse.bind(geocoder))
+          isListening = false
+        }
+      } else {
+        if (!L.DomUtil.hasClass(geocoder._container, 'leaflet-pelias-expanded')) {
+          geocoder.expand()
+          // Make sure only one of these are listening
+          if (isListening === false) {
+            map.on('mousedown', geocoder.collapse.bind(geocoder))
+            isListening = true
+          }
+        }
+      }
+    }
+
+    geocoder.on('expand', function (event) {
+      if (isListening === false) {
+        map.on('mousedown', geocoder.collapse.bind(geocoder))
+        isListening = true
       }
     })
-
-    $(document).ready(function () {
-      var $select = $('.js--mz-citysearch-select2');
-      CITY_DATA.forEach(function (item) {
-        $select.append('<option value="' + item.name + '" data-lat="' + item.lat + '" data-lng="' + item.lng + '" data-zoom="' + item.zoom + '">' + item.name + '</option>')
-      })
-
-      $select.select2({
-        placeholder: 'Search'
-      })
-
-      // Add a class to set it to the expanded state
-      $select.on('select2:opening', function (e) {
-        el.classList.add('js--mz-citysearch-expanded')
-      })
-
-      $select.on('select2:close', function (e) {
-        el.classList.remove('js--mz-citysearch-expanded')
-      })
-
-      // Input into the search field should not bubble up and
-      // interact with other GUIs inserted onto page.
-      // Example: dat-gui listens for 'h' key to hide the UI
-      $select.on('select2:open', function (e) {
-        $('.select2-search__field').on('keydown', function (e) {
-          e.stopPropagation()
-        })
-      })
-
-      $select.on('select2:select', function (e) {
-        /* global map */
-        var el = e.params.data.element
-        var lat = el.dataset.lat
-        var lng = el.dataset.lng
-        var zoom = (el.dataset.zoom === 'undefined') ? null : el.dataset.zoom
-        if (zoom) {
-          map.setView([lat, lng], zoom)
-        } else {
-          map.setView([lat, lng])
-        }
-      })
-    })
-  })
-})()
+  }
+}

@@ -4,7 +4,6 @@ var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
-var jsonminify = require('gulp-jsonminify');
 var cssnano = require('gulp-cssnano');
 var rename = require('gulp-rename');
 var source = require('vinyl-source-stream');
@@ -12,7 +11,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var s3 = require('gulp-s3-upload')(); // load access keys from ~/.aws/credentials
 
-gulp.task('default', ['css', 'js-bug', 'js', 'images', 'json']);
+gulp.task('default', ['css', 'js-bug', 'js', 'images']);
 
 gulp.task('watch', function() {
   gulp.watch('src/**/*', ['default']);
@@ -44,7 +43,10 @@ gulp.task('js', function () {
     debug: true
   });
 
-  return b.bundle()
+  return b
+    // Global transform allows shimming of dependencies as well
+    .transform({ global: true }, 'browserify-shim')
+    .bundle()
     .pipe(source('src/main.js'))
     .pipe(buffer())
     // Copy of unminified JS
@@ -63,12 +65,6 @@ gulp.task('js', function () {
       }))
       .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('dist/ui/'));
-});
-
-gulp.task('json', function () {
-  return gulp.src('src/**/*.json')
-    .pipe(jsonminify())
     .pipe(gulp.dest('dist/ui/'));
 });
 
