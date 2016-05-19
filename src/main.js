@@ -27,7 +27,7 @@ module.exports = (function () {
 
   MPZN.bug = function (options) {
     options = options || {}
-    Bug(options)
+    var bug = Bug(options)
 
     var leafletMap
 
@@ -37,6 +37,11 @@ module.exports = (function () {
       leafletMap = options.map
     } else if (window.map && window.map._container && window.map._container instanceof HTMLElement) {
       leafletMap = window.map
+    }
+
+    // if leaflet, move the bug element into its .leaflet-control-container
+    if (leafletMap) {
+      leafletMap._container.querySelector('.leaflet-control-container').appendChild(bug.el)
     }
 
     // Sorted by reverse order

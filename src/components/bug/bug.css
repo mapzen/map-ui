@@ -4,7 +4,7 @@
 }
 
 .mz-bug-container {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 50%;
   margin-left: -144px;
