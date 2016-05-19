@@ -20,7 +20,7 @@
     "local": "http-server dist -p 4000"
   },
   "dependencies": {
-    "leaflet-geocoder-mapzen": "1.6.0",
+    "leaflet-geocoder-mapzen": "1.6.1",
     "leaflet.locatecontrol": "0.52.0"
   },
   "devDependencies": {

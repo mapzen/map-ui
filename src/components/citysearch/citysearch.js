@@ -35,7 +35,7 @@ module.exports = {
     require('leaflet-geocoder-mapzen')
 
     // Load external stylesheet
-    var STYLESHEET = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.6.0/leaflet-geocoder-mapzen.min.css'
+    var STYLESHEET = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.6.1/leaflet-geocoder-mapzen.min.css'
     utils.loadExternalStylesheet(STYLESHEET)
 
     var DEMO_API_KEY = 'search-MKZrG6M'
@@ -64,9 +64,17 @@ module.exports = {
     checkResize() // Check on load
 
     var isListening = false
+    var previousWidth = getViewportWidth()
+
+    function getViewportWidth () {
+      return window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : window.screen.width
+    }
 
     function checkResize (event) {
-      var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : window.screen.width
+      var width = getViewportWidth()
+
+      // don't do anything if the WIDTH has not changed.
+      if (width === previousWidth) return
 
       if (width < 900) {
         // Do these checks to make sure collapse / expand events don't fire continuously
@@ -85,6 +93,8 @@ module.exports = {
           }
         }
       }
+
+      previousWidth = width
     }
 
     geocoder.on('expand', function (event) {
