@@ -70,7 +70,7 @@ module.exports = (function () {
     }
 
     // if leaflet, move the bug element into its .leaflet-control-container
-    if (leafletMap) {
+    if (leafletMap && bug.el && bug.el instanceof HTMLElement) {
       leafletMap._container.querySelector('.leaflet-control-container').appendChild(bug.el)
     }
 
