@@ -26,6 +26,7 @@ module.exports = (function () {
   }
 
   MPZN.bug = function (options) {
+    options = options || {}
     Bug(options)
 
     var leafletMap
