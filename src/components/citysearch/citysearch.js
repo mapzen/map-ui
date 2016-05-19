@@ -58,5 +58,40 @@ module.exports = {
     // Re-sort control order so that geocoder is on top
     // geocoder._container is a reference to the geocoder's DOM element.
     geocoder._container.parentNode.insertBefore(geocoder._container, geocoder._container.parentNode.childNodes[0])
+
+    // Handle when viewport is smaller
+    window.addEventListener('resize', checkResize)
+    checkResize() // Check on load
+
+    var isListening = false
+
+    function checkResize (event) {
+      var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : window.screen.width
+
+      if (width < 900) {
+        // Do these checks to make sure collapse / expand events don't fire continuously
+        if (L.DomUtil.hasClass(geocoder._container, 'leaflet-pelias-expanded')) {
+          geocoder.collapse()
+          map.off('mousedown', geocoder.collapse.bind(geocoder))
+          isListening = false
+        }
+      } else {
+        if (!L.DomUtil.hasClass(geocoder._container, 'leaflet-pelias-expanded')) {
+          geocoder.expand()
+          // Make sure only one of these are listening
+          if (isListening === false) {
+            map.on('mousedown', geocoder.collapse.bind(geocoder))
+            isListening = true
+          }
+        }
+      }
+    }
+
+    geocoder.on('expand', function (event) {
+      if (isListening === false) {
+        map.on('mousedown', geocoder.collapse.bind(geocoder))
+        isListening = true
+      }
+    })
   }
 }
