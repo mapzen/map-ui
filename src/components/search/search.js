@@ -32,7 +32,7 @@ module.exports = {
 
     require('leaflet-geocoder-mapzen')
 
-    var DEMO_API_KEY = 'search-MKZrG6M'
+    var DEMO_API_KEY = 'search-PFZ8iFx'
 
     var geocoderOptions = {
       expanded: true,
