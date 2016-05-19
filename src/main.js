@@ -1,4 +1,4 @@
-// (c) 2015 Mapzen
+// (c) 2015-2016 Mapzen
 //
 // MAPZEN UI BUNDLE
 //
@@ -13,27 +13,35 @@ var geolocator = require('./components/geolocator/geolocator')
 var zoomControl = require('./components/utils/zoom-control')
 var anchorTargets = require('./components/utils/anchor-targets')
 
-var STYLESHEET = '../dist/ui/mapzen-ui.min.css'; //https://mapzen.com/common/ui/mapzen-ui.min.css'
+// To avoid making an external request for styles (which results in an ugly
+// Flash of Unstyled Content) we're going to inline all the styles into
+// this JS file. This is done by taking the minified, concatenated CSS and
+// inserting it via mustache in this variable here:
+var css = '{{{ cssText }}}'
 
-// Loads external stylesheet for the bug.
+// Loads stylesheet for the bug.
 // Ensures that it is placed before other defined stylesheets or style
 // blocks in the head, so that custom styles are allowed to override
-function _loadExternalStylesheet (stylesheetUrl) {
-  var el = document.createElement('link')
+function insertStylesheet (cssText) {
   var firstStylesheet = document.head.querySelectorAll('link, style')[0]
+  var styleEl = document.createElement('style')
 
-  el.setAttribute('rel', 'stylesheet')
-  el.setAttribute('type', 'text/css')
-  el.setAttribute('href', stylesheetUrl)
+  styleEl.type = 'text/css'
+
+  if (styleEl.styleSheet){
+    styleEl.styleSheet.cssText = css
+  } else {
+    styleEl.appendChild(document.createTextNode(css))
+  }
 
   if (firstStylesheet !== 'undefined') {
-    document.head.insertBefore(el, firstStylesheet)
+    document.head.insertBefore(styleEl, firstStylesheet)
   } else {
-    document.head.appendChild(el)
+    document.head.appendChild(styleEl)
   }
 }
 
-_loadExternalStylesheet(STYLESHEET)
+insertStylesheet(css)
 
 // Export
 module.exports = (function () {
