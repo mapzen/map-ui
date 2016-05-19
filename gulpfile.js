@@ -11,7 +11,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var s3 = require('gulp-s3-upload')(); // load access keys from ~/.aws/credentials
 
-gulp.task('default', ['css', 'js-bug', 'js', 'images']);
+gulp.task('default', ['css', 'js', 'images']);
 
 gulp.task('watch', function() {
   gulp.watch('src/**/*', ['default']);
@@ -26,15 +26,6 @@ gulp.task('css', function () {
       extname: '.min.css'
     }))
     .pipe(gulp.dest('dist/ui/'));
-});
-
-gulp.task('js-bug', function () {
-  return gulp.src(['src/components/bug/bug.js'])
-    .pipe(uglify())
-    .pipe(rename({
-      extname: '.min.js'
-    }))
-    .pipe(gulp.dest('dist/ui/components/bug/'));
 });
 
 gulp.task('js', function () {
