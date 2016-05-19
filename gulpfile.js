@@ -4,7 +4,9 @@ var browserify = require('browserify');
 var buffer = require('vinyl-buffer');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var cssimport = require('gulp-cssimport');
 var cssnano = require('gulp-cssnano');
+var cssBase64 = require('gulp-css-base64');
 var rename = require('gulp-rename');
 var source = require('vinyl-source-stream');
 var sourcemaps = require('gulp-sourcemaps');
@@ -18,11 +20,21 @@ gulp.task('watch', function() {
 });
 
 gulp.task('css', function () {
-  return gulp.src(['src/**/*.css', '!src/**/vendor/**'])
+  return gulp.src('src/main.css')
+    .pipe(cssimport())
+    .pipe(cssBase64({
+      // We're gonna inline all the images so as to not worry
+      // about juggling paths
+      // Relative to src/main.css, this baseDir is only to
+      // capture relative image sources from the geocoder plugin
+      baseDir: '../node_modules/leaflet-geocoder-mapzen/dist/',
+      extensionsAllowed: ['.png']
+    }))
     .pipe(cssnano({
       zindex: false // Do not allow postcss to rebase z-index values
     }))
     .pipe(rename({
+      basename: 'mapzen-ui',
       extname: '.min.css'
     }))
     .pipe(gulp.dest('dist/ui/'));

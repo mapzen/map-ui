@@ -3,8 +3,6 @@
 // MAP UI · CITY SEARCH v2
 //
 // ----------------------------------------------------------------------------
-var utils = require('../common/utils')
-
 module.exports = {
   init: function (options, map) {
     /* global map */
@@ -33,10 +31,6 @@ module.exports = {
     if (options.show === false) return false
 
     require('leaflet-geocoder-mapzen')
-
-    // Load external stylesheet
-    var STYLESHEET = 'https://cdnjs.cloudflare.com/ajax/libs/leaflet-geocoder-mapzen/1.6.1/leaflet-geocoder-mapzen.min.css'
-    utils.loadExternalStylesheet(STYLESHEET)
 
     var DEMO_API_KEY = 'search-MKZrG6M'
 

@@ -10,7 +10,7 @@
 var MapzenBug = (function () {
   'use strict'
 
-  var STYLESHEET = 'https://mapzen.com/common/ui/components/bug/bug.min.css'
+  var STYLESHEET = '../dist/ui/mapzen-ui.min.css'; //https://mapzen.com/common/ui/mapzen-ui.min.css'
   var DEFAULT_LINK = 'https://mapzen.com/'
   var DEFAULT_GITHUB_LINK = 'https://github.com/mapzen/'
   var TRACKING_CATEGORY = 'demo'
