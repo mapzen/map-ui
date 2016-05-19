@@ -2,3 +2,4 @@
 @import 'components/bug/bug.css';
 @import 'components/geolocator/geolocator.css';
 @import '../node_modules/leaflet-geocoder-mapzen/dist/leaflet-geocoder-mapzen.css';
+@import 'components/search/search.css'; /* This overrides the above */

@@ -8,16 +8,38 @@
 'use strict'
 
 var Bug = require('./components/bug/bug')
-var citysearch = require('./components/citysearch/citysearch')
+var search = require('./components/search/search')
 var geolocator = require('./components/geolocator/geolocator')
 var zoomControl = require('./components/utils/zoom-control')
 var anchorTargets = require('./components/utils/anchor-targets')
+
+var STYLESHEET = '../dist/ui/mapzen-ui.min.css'; //https://mapzen.com/common/ui/mapzen-ui.min.css'
+
+// Loads external stylesheet for the bug.
+// Ensures that it is placed before other defined stylesheets or style
+// blocks in the head, so that custom styles are allowed to override
+function _loadExternalStylesheet (stylesheetUrl) {
+  var el = document.createElement('link')
+  var firstStylesheet = document.head.querySelectorAll('link, style')[0]
+
+  el.setAttribute('rel', 'stylesheet')
+  el.setAttribute('type', 'text/css')
+  el.setAttribute('href', stylesheetUrl)
+
+  if (firstStylesheet !== 'undefined') {
+    document.head.insertBefore(el, firstStylesheet)
+  } else {
+    document.head.appendChild(el)
+  }
+}
+
+_loadExternalStylesheet(STYLESHEET)
 
 // Export
 module.exports = (function () {
   var MPZN = {
     // Reference for legacy
-    citysearch: citysearch,
+    citysearch: search,
     geolocator: geolocator,
     Utils: {
       anchorTargets: anchorTargets,
@@ -46,7 +68,7 @@ module.exports = (function () {
 
     // Sorted by reverse order
     geolocator.init(options.locate, leafletMap)
-    citysearch.init(options.search, leafletMap)
+    search.init(options.search, leafletMap)
   }
 
   // Do stuff

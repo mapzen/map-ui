@@ -1,6 +1,6 @@
 // (c) 2015 Mapzen
 //
-// MAP UI · CITY SEARCH v2
+// MAP UI · MAPZEN SEARCH
 //
 // ----------------------------------------------------------------------------
 module.exports = {
