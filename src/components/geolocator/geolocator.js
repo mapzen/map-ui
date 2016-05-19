@@ -38,6 +38,7 @@ module.exports = {
       drawCircle: false,
       follow: false,
       showPopup: false,
+      drawMarker: false,
       markerStyle: {
         opacity: 0,
       },
@@ -45,7 +46,9 @@ module.exports = {
         title: 'Get current location'
       },
       icon: 'mz-geolocator-icon',
-      iconLoading: 'mz-geolocator-icon mz-geolocator-active'
+      // We piggy back on geocoder plugin styles and use their load icon so it is the same.
+      // Re-using the class name means we don't duplicate the embedded image style in the compiled bundle.
+      iconLoading: 'mz-geolocator-icon mz-geolocator-active leaflet-pelias-search-icon leaflet-pelias-loading'
     }).addTo(map)
 
     // Re-sort control order so that locator is on top

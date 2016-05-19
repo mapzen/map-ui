@@ -3,3 +3,7 @@
   border-bottom: 0 !important;
   height: 100% !important;
 }
+
+.leaflet-pelias-control.leaflet-pelias-control.leaflet-pelias-control {
+  z-index: 810;
+}

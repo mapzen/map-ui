@@ -25,7 +25,7 @@ gulp.task('css', ['copy-images'], function () {
   return gulp.src('src/main.css')
     .pipe(cssimport())
     .pipe(cssBase64({
-      extensionsAllowed: ['.png']
+      extensionsAllowed: ['.png', '.gif']
     }))
     .pipe(cssnano({
       zindex: false // Do not allow postcss to rebase z-index values
@@ -80,7 +80,7 @@ gulp.task('js', ['css'], function () {
 // Copy leaflet geocoder plugin images to one place so that the image-inliner
 // can find everything easily.
 gulp.task('copy-images', function () {
-  return gulp.src('node_modules/leaflet-geocoder-mapzen/dist/images/*.png')
+  return gulp.src('node_modules/leaflet-geocoder-mapzen/dist/images/*')
     .pipe(gulp.dest('src/images/'));
 });
 
