@@ -4,8 +4,6 @@
 //
 // "Locate me" button for demos
 // ----------------------------------------------------------------------------
-var utils = require('../common/utils')
-
 module.exports = {
   init: function (options, map) {
     /* global map */
@@ -34,10 +32,6 @@ module.exports = {
     if (options.show === false) return false
 
     require('leaflet.locatecontrol')
-
-    // Load external stylesheet
-    var STYLESHEET = 'https://mapzen.com/common/ui/components/geolocator/geolocator.min.css'
-    utils.loadExternalStylesheet(STYLESHEET)
 
     // Geolocator
     var locator = L.control.locate({

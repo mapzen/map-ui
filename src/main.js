@@ -1,4 +1,4 @@
-// (c) 2015 Mapzen
+// (c) 2015-2016 Mapzen
 //
 // MAPZEN UI BUNDLE
 //
@@ -8,16 +8,46 @@
 'use strict'
 
 var Bug = require('./components/bug/bug')
-var citysearch = require('./components/citysearch/citysearch')
+var search = require('./components/search/search')
 var geolocator = require('./components/geolocator/geolocator')
 var zoomControl = require('./components/utils/zoom-control')
 var anchorTargets = require('./components/utils/anchor-targets')
+
+// To avoid making an external request for styles (which results in an ugly
+// Flash of Unstyled Content) we're going to inline all the styles into
+// this JS file. This is done by taking the minified, concatenated CSS and
+// inserting it via mustache in this variable here:
+var css = '{{{ cssText }}}'
+
+// Loads stylesheet for the bug.
+// Ensures that it is placed before other defined stylesheets or style
+// blocks in the head, so that custom styles are allowed to override
+function insertStylesheet (cssText) {
+  var firstStylesheet = document.head.querySelectorAll('link, style')[0]
+  var styleEl = document.createElement('style')
+
+  styleEl.type = 'text/css'
+
+  if (styleEl.styleSheet){
+    styleEl.styleSheet.cssText = css
+  } else {
+    styleEl.appendChild(document.createTextNode(css))
+  }
+
+  if (firstStylesheet !== 'undefined') {
+    document.head.insertBefore(styleEl, firstStylesheet)
+  } else {
+    document.head.appendChild(styleEl)
+  }
+}
+
+insertStylesheet(css)
 
 // Export
 module.exports = (function () {
   var MPZN = {
     // Reference for legacy
-    citysearch: citysearch,
+    citysearch: search,
     geolocator: geolocator,
     Utils: {
       anchorTargets: anchorTargets,
@@ -40,13 +70,13 @@ module.exports = (function () {
     }
 
     // if leaflet, move the bug element into its .leaflet-control-container
-    if (leafletMap) {
+    if (leafletMap && bug.el && bug.el instanceof HTMLElement) {
       leafletMap._container.querySelector('.leaflet-control-container').appendChild(bug.el)
     }
 
     // Sorted by reverse order
     geolocator.init(options.locate, leafletMap)
-    citysearch.init(options.search, leafletMap)
+    search.init(options.search, leafletMap)
   }
 
   // Do stuff

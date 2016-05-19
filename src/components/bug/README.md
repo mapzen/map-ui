@@ -1,6 +1,8 @@
 bug
 ===
 
+**NOTE:** Standalone bug usage is **deprecated.**
+
 We make demo pages that are [meant to be iframed into other pages](https://tangrams.github.io/tangram/#mapzen,40.70532700869127,-74.0097749233246,16). [Sometimes](http://tangrams.github.io/tangram-docs-assets/?procedural/tronish.yaml#16/40.7053/-74.0098) they [go viral](http://www.citylab.com/design/2015/03/a-mesmerizing-futuristic-map-with-animated-traffic-and-glowing-buildings/388285/). We need a way to link viewers back to Mapzen so they can learn more about us.
 
 The term "bug" is borrowed from broadcast television (officially, ["digital on-screen graphic"](http://en.wikipedia.org/wiki/Digital_on-screen_graphic)) where a show is branded in the lower corner to identify the broadcast network. The other meaning of "bug" in computing might make this not a great term to use in the long run.

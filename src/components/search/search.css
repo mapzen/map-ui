@@ -1,0 +1,5 @@
+/* We need these to take priority because it may be overridden by Leaflet */
+.leaflet-bar a.leaflet-pelias-search-icon {
+  border-bottom: 0 !important;
+  height: 100% !important;
+}

@@ -10,7 +10,6 @@
 var MapzenBug = (function () {
   'use strict'
 
-  var STYLESHEET = 'https://mapzen.com/common/ui/components/bug/bug.min.css'
   var DEFAULT_LINK = 'https://mapzen.com/'
   var DEFAULT_GITHUB_LINK = 'https://github.com/mapzen/'
   var TRACKING_CATEGORY = 'demo'
@@ -44,24 +43,6 @@ var MapzenBug = (function () {
     ga('create', ANALYTICS_PROPERTY_ID, 'auto');
     ga('send', 'pageview');
     /* eslint-enable */
-  }
-
-  // Loads external stylesheet for the bug.
-  // Ensures that it is placed before other defined stylesheets or style
-  // blocks in the head, so that custom styles are allowed to override
-  function _loadExternalStylesheet (stylesheetUrl) {
-    var el = document.createElement('link')
-    var firstStylesheet = document.head.querySelectorAll('link, style')[0]
-
-    el.setAttribute('rel', 'stylesheet')
-    el.setAttribute('type', 'text/css')
-    el.setAttribute('href', stylesheetUrl)
-
-    if (firstStylesheet !== 'undefined') {
-      document.head.insertBefore(el, firstStylesheet)
-    } else {
-      document.head.appendChild(el)
-    }
   }
 
   function _popupWindow (url, title, w, h) {
@@ -184,7 +165,6 @@ var MapzenBug = (function () {
 
     this.setOptions(options)
 
-    _loadExternalStylesheet(this.opts.stylesheet)
     this.el = _createElsAndAppend()
     this.twitterEl = this.el.querySelector('.mz-bug-twitter-link')
     this.facebookEl = this.el.querySelector('.mz-bug-facebook-link')
@@ -225,8 +205,7 @@ var MapzenBug = (function () {
     // Default options
     opts = opts || {
       analytics: true,
-      name: null,
-      stylesheet: STYLESHEET
+      name: null
     }
 
     // Copy options values
