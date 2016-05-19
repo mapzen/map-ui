@@ -13,21 +13,16 @@ var sourcemaps = require('gulp-sourcemaps');
 var uglify = require('gulp-uglify');
 var s3 = require('gulp-s3-upload')(); // load access keys from ~/.aws/credentials
 
-gulp.task('default', ['css', 'js', 'images']);
+gulp.task('default', ['css', 'js']);
 
 gulp.task('watch', function() {
   gulp.watch('src/**/*', ['default']);
 });
 
-gulp.task('css', function () {
+gulp.task('css', ['copy-images'], function () {
   return gulp.src('src/main.css')
     .pipe(cssimport())
     .pipe(cssBase64({
-      // We're gonna inline all the images so as to not worry
-      // about juggling paths
-      // Relative to src/main.css, this baseDir is only to
-      // capture relative image sources from the geocoder plugin
-      baseDir: '../node_modules/leaflet-geocoder-mapzen/dist/',
       extensionsAllowed: ['.png']
     }))
     .pipe(cssnano({
@@ -71,9 +66,11 @@ gulp.task('js', function () {
     .pipe(gulp.dest('dist/ui/'));
 });
 
-gulp.task('images', function () {
-  return gulp.src('src/**/*.png')
-    .pipe(gulp.dest('dist/ui/'));
+// Copy leaflet geocoder plugin images to one place so that the image-inliner
+// can find everything easily.
+gulp.task('copy-images', function () {
+  return gulp.src('node_modules/leaflet-geocoder-mapzen/dist/images/*.png')
+    .pipe(gulp.dest('src/images/'));
 });
 
 gulp.task('publish', function () {
