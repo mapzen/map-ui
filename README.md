@@ -36,7 +36,7 @@ Included components:
 
 ### Bug (separate module)
 
-Branding, social sharing, and tracking UI component for standalone demos. [[separate module](https://github.com/mapzen/ui/tree/master/src/components/bug)]
+Branding, social sharing, and tracking UI component for standalone demos. [[separate module](https://github.com/mapzen/scarab/tree/master/src/components/bug)]
 
 ### Mapzen Search
 
