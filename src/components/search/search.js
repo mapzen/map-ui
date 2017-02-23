@@ -43,7 +43,8 @@ module.exports = {
       polygonIcon: false,
       markers: false,
       params: {
-        sources: 'wof'
+        // TODO: remove geonames after WOF incorporates cities & Pelias includes alt-name search
+        sources: 'wof,gn'
       }
     }
 
