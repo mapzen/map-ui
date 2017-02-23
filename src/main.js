@@ -12,6 +12,7 @@ var search = require('./components/search/search')
 var geolocator = require('./components/geolocator/geolocator')
 var zoomControl = require('./components/utils/zoom-control')
 var anchorTargets = require('./components/utils/anchor-targets')
+var mapzenKeyChecker = require('./components/utils/mapzen-key-checker')
 
 // To avoid making an external request for styles (which results in an ugly
 // Flash of Unstyled Content) we're going to inline all the styles into
@@ -81,6 +82,7 @@ module.exports = (function () {
 
   // Do stuff
   MPZN.Utils.zoomControl()
+  mapzenKeyChecker()
 
   // Only operate if iframed
   if (window.self !== window.top) {
