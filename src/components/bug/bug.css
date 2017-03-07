@@ -48,19 +48,13 @@
 .mz-bug-mapzen-link:hover,
 .mz-bug-mapzen-link:active {
   background: white;
-  box-shadow: inset 0 -4px 0 #d4645c;
-}
-
-.mz-bug-mapzen-link:hover .mz-bug-mapzen-logo,
-.mz-bug-mapzen-link:active .mz-bug-mapzen-logo {
-  background-position: 0 0;
+  box-shadow: inset 0 -4px 0 #635378;
 }
 
 .mz-bug-mapzen-logo {
   background-image: url('images/logo.png');
   background-repeat: no-repeat;
   background-size: 100%;
-  background-position: 0 -48px;
   width: 100%;
   height: 100%;
   margin-top: -1px;
@@ -77,14 +71,8 @@
 }
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .mz-bug-mapzen-link:hover .mz-bug-mapzen-logo,
-  .mz-bug-mapzen-link:active .mz-bug-mapzen-logo {
-    background-position: 0 0;
-  }
-
   .mz-bug-mapzen-logo {
     background-image: url('images/logo@2x.png');
-    background-position: 0 -48px;
   }
 }
 
