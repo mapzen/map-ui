@@ -98,8 +98,4 @@ Then, each time you want to build everything:
 gulp          # Files are generated in dist/
 ```
 
-To publish to S3: (env variables containing S3 credentials are expected)
-
-```shell
-gulp publish
-```
+To publish to S3: commits to `master` branch are auto-deployed via CircleCI.
