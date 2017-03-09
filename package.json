@@ -1,16 +1,16 @@
 {
-  "name": "mapzen-scarab",
+  "name": "mapzen-map-ui",
   "version": "1.0.0",
-  "description": "mapzen mab scarab",
-  "homepage": "https://github.com/mapzen/scarab",
+  "description": "mapzen map / demo ui (internal use only / deprecated)",
+  "homepage": "https://github.com/mapzen/map-ui",
   "private": true,
   "main": "src/main.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mapzen/scarab.git"
+    "url": "https://github.com/mapzen/map-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/mapzen/scarab/issues"
+    "url": "https://github.com/mapzen/map-ui/issues"
   },
   "author": "",
   "license": "MIT",
