@@ -1,5 +1,5 @@
-mapzen map scarab
-=================
+mapzen map ui [deprecated]
+==========================
 
 this adds common ui elements for map demos made by mapzen. currently it assumes a globally accessible `map` object that is a Leaflet instance.
 
