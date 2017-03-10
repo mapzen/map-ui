@@ -19,7 +19,8 @@
   },
   "dependencies": {
     "leaflet-geocoder-mapzen": "1.7.1",
-    "leaflet.locatecontrol": "0.60.0"
+    "leaflet.locatecontrol": "0.60.0",
+    "mapzen-scarab": "https://github.com/mapzen/scarab.git"
   },
   "devDependencies": {
     "browserify": "14.1.0",

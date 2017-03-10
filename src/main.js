@@ -7,7 +7,7 @@
 /* global require, module */
 'use strict'
 
-var Bug = require('./components/bug/bug')
+var Bug = require('mapzen-scarab')
 var search = require('./components/search/search')
 var geolocator = require('./components/geolocator/geolocator')
 var zoomControl = require('./components/utils/zoom-control')

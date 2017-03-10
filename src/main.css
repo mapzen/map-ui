@@ -1,5 +1,5 @@
 @charset 'utf-8';
-@import 'components/bug/bug.css';
+@import '../node_modules/mapzen-scarab/src/scarab.css';
 @import 'components/geolocator/geolocator.css';
 @import '../node_modules/leaflet-geocoder-mapzen/dist/leaflet-geocoder-mapzen.css';
 @import 'components/search/search.css'; /* This overrides the above */
